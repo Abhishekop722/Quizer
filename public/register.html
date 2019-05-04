@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="css/images/icon.png">
+    <link rel="stylesheet" href="lib/bootstrap-4.2.1-dist/bootstrap-4.2.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" href="css/register.css">
+    <script src="js/util.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/register.js"></script>
+    <script src="js/util.js"></script>
+    <title>Home</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark">
+        <a class="navbar-brand" href="index.html">Quizer</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#content" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="content" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">About</a></li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item "><a class="nav-link" id="logout" href="teacherlogin.html">Administration Login</a></li>
+                <li class="nav-item "><a class="nav-link" id="logout" href="studentlogin.html">Student Login</a></li>
+                <li class="nav-item "><a class="nav-link" id="logout" href="register.html">Register</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="welcomeScreen">
+        <div id="wrapper">
+            <div id="brand" class="vertical-text">&lt&#47Quizer&#47&gt</div>
+            <div id="form">
+                <h1 class="text-center">Register</h1>
+                <div>
+                    <input id="name" type="text" placeholder="Full name">
+                    <select id="role">
+                        <option value="t">Teacher</option>
+                        <option value="s">Student</option>
+                    </select>
+                    <input id="uid" type="text" placeholder="User-id or Email">
+                    <input id="pwd" type="password" placeholder="password">
+                    <div>
+                        <button id="register" class="btn btn-secondary">Register</button>
+                        <a id="login" href="studentlogin.html">Login</a>
+                    </div>
+                    <p id="status"></p>
+                </div>
+            </div>
+        </div>        
+    </div>
+</body>
+</html>

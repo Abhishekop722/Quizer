@@ -1,0 +1,97 @@
+p .fas{
+    margin-right: 10px;
+}
+#userdiv{
+    position:relative;
+    width:15vw;
+    background: grey;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+#user{
+    position:absolute;
+    color:black;
+    top:11.6vw;
+    width:100%;
+    left:0vw;
+    padding: 5px 30px 10px 30px;
+    line-height: 15px;
+    text-align: center;
+    font-weight: bolder;
+    word-wrap: break-word;
+}
+body{
+    background: rgb(185, 213, 240) !important;
+}
+
+#wrapper{
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.active{
+    color:darkgreen !important;
+    text-decoration: underline;
+}
+.testcontainer{
+    width:70vw !important;
+    margin:3vw;
+}
+#dashboard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: rgba(0, 0, 0,0.1);
+    position: fixed;
+    left:0;
+    padding-top:20px;
+    width:20vw;
+    height:100vh;
+}
+#blockage{
+    z-index: 1;
+    height: 15vw;
+    background: transparent;
+    position:absolute;
+    cursor: pointer;
+}
+#dashboard img ,#blockage{
+    border-radius:50%;
+    width:15vw;
+}
+#dashboard ul{
+    list-style: none;
+    transform: translateX(-20%);
+}
+#dashboard a{
+    color:darkblue;
+}
+#dashboard a:hover{
+    text-decoration: none;
+}
+.notification{
+    z-index: 7;
+    position: fixed;
+    font-size: 28px;
+    height:50px;
+    text-align: center;
+    top:0;
+    width:100vw;
+    margin:0;
+    transition: all 1s;
+}
+#root{
+    margin-top:50px;
+}
+.zerotests{
+    
+}
+.brand{
+    background: -webkit-linear-gradient( darkblue 20%, red );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bolder;
+    font-size:34px;
+    margin-bottom: 10px;
+}

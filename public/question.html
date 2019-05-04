@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="css/images/icon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="lib/bootstrap-4.2.1-dist/bootstrap-4.2.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/questionOperation.js"></script>
+    <script src="js/question.js"></script>
+    <script src="js/controller.js"></script>
+    <title>CRUD</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="">Quizer</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#content" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="content" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="" id="user"></a></li>
+                <li class="nav-item "><a class="nav-link" id="logout" href="#">logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div id="editPopup">
+        <div><span id="cross">&times</span></div>
+        <div class="form-group">
+            <label for="">Question Id</label>
+            <label id="eid" class="form-control"></label>
+        </div>
+        <div class="form-group">
+            <label for="">Question</label>
+            <textarea id="ename" type="text" class="form-control clear"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="">Option A</label>
+            <input id="eopt1" type="text" class="form-control clear">
+        </div>
+        <div class="form-group">
+            <label for="">Option B</label>
+            <input id="eopt2" type="text" class="form-control clear">
+        </div>
+        <div class="form-group">
+            <label for="">Option C</label>
+            <input id="eopt3" type="text" class="form-control clear">
+        </div>
+        <div class="form-group">
+            <label for="">Option D</label>
+            <input id="eopt4" type="text" class="form-control clear">
+        </div>
+        <div class="form-group">
+            <label for="">Score</label>
+            <input id="escore" type="range" max="5" min="1" class="form-control-range clear">
+        </div>
+        <div class="form-group">
+            <label for="">Right Answer</label>
+            <select id="eans" class="form-control">
+                <option value="a">A</option>
+                <option value="b">B</option>
+                <option value="c">C</option>
+                <option value="d">D</option>
+            </select>
+        </div>
+        <button id="update" class="btn btn-warning"><i class="fas fa-edit"></i>Update</button>
+    </div>
+    <div id="blockage"></div>
+    <div id="testModal">
+        <div><span id="testCross">&times</span></div>
+        <div id="form">
+            <h1 class="text-center">Create Test</h1>
+            <hr>
+            <div class="form-group">
+                <label id="testId" class="form-control"></label>
+                <input id="testName" class="form-control" type="text" placeholder="Test name">
+                <textarea id="testDescription" class="form-control" placeholder="Description"></textarea>
+                <input id="testTime" class="form-control" type="number" placeholder="Time for test in minutes">
+                <div>
+                    <button id="createTest" class="btn btn-secondary">Create test</button>
+                    <button id="next" class="btn btn-secondary">Next</button>
+                </div>
+                <!-- <p id="status"></p> -->
+            </div>
+            <div id="selectQuestion">
+                <h3>Add Questions in this test.</h3>
+                <table class="table table-bordered">
+                    <thead>
+                        <th>Id</th>
+                        <th>Question</th>
+                        <th>Score</th>
+                    </thead>
+                    <tbody id="testBody"></tbody>
+                </table>
+                <button class="btn btn-primary " id="addInTest">Add in test</button>
+                <button class="btn btn-primary" id="updateTest">Update</button>
+            </div>
+        </div>
+    </div>
+    <div id="container" class="content container">
+        <div id="wrapper">
+            <h1>Teacher Panel</h1>
+            <div class="form-group">
+                <label for="">Question Id</label>
+                <label id="id" class="form-control"></label>
+            </div>
+            <div class="form-group">
+                <label for="">Question</label>
+                <textarea id="name" type="text" class="form-control clear"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="">Option A</label>
+                <input id="opt1" type="text" class="form-control clear">
+            </div>
+            <div class="form-group">
+                <label for="">Option B</label>
+                <input id="opt2" type="text" class="form-control clear">
+            </div>
+            <div class="form-group">
+                <label for="">Option C</label>
+                <input id="opt3" type="text" class="form-control clear">
+            </div>
+            <div class="form-group">
+                <label for="">Option D</label>
+                <input id="opt4" type="text" class="form-control clear">
+            </div>
+            <div class="form-group">
+                <label for="">Score</label>
+                <input id="score" type="range" max="5" min="1" class="form-control-range clear">
+                <label for="">Value - <span id="scoreValue"></span> </label>
+            </div>
+            <div class="form-group">
+                <label for="">Right Answer</label>
+                <select id="ans" class="form-control">
+                    <option value="a">A</option>
+                    <option value="b">B</option>
+                    <option value="c">C</option>
+                    <option value="d">D</option>
+                </select>
+            </div>
+            <button id="add" class="btn btn-primary" ><i class="fas fa-plus-square"></i>Add</button>
+            
+        </div>
+        <div id="dashboard">
+            <div id="searchBox">
+                <input type="button" id="search"></input>
+                <input id="querySearch" type="text" placeholder="Search...">
+            </div>
+            <label style="color:grey;">Local Operations</label>
+            <hr style="margin:0 0 10px 0">
+            <button id="newTest" class="btn btn-primary">Create Test</button>
+            <button id="remove" disabled class="btn btn-danger"><i class="fas fa-trash-alt"></i>Delete selected questions and tables</button>
+            <label style="color:grey;">Local Storage</label>
+            <hr style="margin:0 0 10px 0">
+            <button id="save" class="btn btn-success"><i class="fas fa-save"></i>Save</button>
+            <button id="load" class="btn btn-secondary"><i class="fas fa-download"></i>Load</button>
+            <button id="localClear" class="btn btn-danger"><i class="fas fa-dumpster"></i>Reset your local records</button>
+            <!-- <button id="sort" class="btn btn-info"><i class="fas fa-sort-amount-down"></i>Sort</button> -->
+            <label style="color:grey;">Server Storage</label>
+            <hr style="margin:0 0 10px 0">
+            <button id="server" class="btn btn-success"><i class="fas fa-cloud-upload-alt"></i>Save to Server</button>
+            <button id="clear" class="btn btn-danger"><i class="fas fa-dumpster-fire"></i>Reset your all records</button>
+        </div>    
+    </div>
+    <div id="questionTable" class="table-responsive content">
+        <h2>Questions</h2>
+        <div id="sort" class="mt-5">Sort by - 
+            <ul id="info" class="list-inline">
+                <li class="list-inline-item"><a id="idSort" class="current" href="#questionTable">Id</a></li>
+                <li class="list-inline-item"><a id="nameSort" href="#questionTable">Name</a></li>
+                <li class="list-inline-item"><a id="scoreSort" href="#questionTable">Score</a></li>
+            </ul>
+        </div>
+        <div class="alert-info mt-4">
+            <ul id="info" class="list-inline">
+                <li class="list-inline-item">Total records <span id="total">0</span></li>
+                <li class="list-inline-item">Total mark records <span id="mark">0</span></li>
+                <li class="list-inline-item">Total unmark records <span id="unmark">0</span></li>
+            </ul>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col" style="width:50px;word-wrap:break-word;">Id</th>
+                    <th scope="col" >Question</th>
+                    <th scope="col">Opt A</th>
+                    <th scope="col">Opt B</th>
+                    <th scope="col">Opt C</th>
+                    <th scope="col">Opt D</th>
+                    <th scope="col" style="width:50px;word-wrap:break-word;">Score</th>
+                    <th scope="col" style="width:50px;word-wrap:break-word;">Correct Answer</th>
+                    <th scope="col" style="width:50px;word-wrap:break-word;">Operations</th>
+                </tr>
+            </thead>
+            <tbody id="dataBody">
+            </tbody>
+        </table>
+    </div>
+    <div id="testTable" class="content">
+        <h2>Tests</h2>
+        <div id="testSort" class="mt-5">Sort by - 
+            <ul id="info" class="list-inline">
+                <li class="list-inline-item"><a id="testidSort" class="current" href="#testTable">Id</a></li>
+                <li class="list-inline-item"><a id="testnameSort" href="#testTable">Name</a></li>
+                <li class="list-inline-item"><a id="testscoreSort" href="#testTable">Score</a></li>
+            </ul>
+        </div>
+        <div class="alert-info mt-4">
+            <ul id="testInfo" class="list-inline">
+                <li class="list-inline-item">Total records <span id="testtotal">0</span></li>
+                <li class="list-inline-item">Total mark records <span id="testmark">0</span></li>
+                <li class="list-inline-item">Total unmark records <span id="testunmark">0</span></li>
+            </ul>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <th>Test Id</th>
+                <th>Test name</th>
+                <th>Test Description</th>
+                <th>questions</th>
+                <th>Score</th>
+                <th>Time(in minutes)</th>
+                <th>Operation</th>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</body>
+</html>
