@@ -1,6 +1,7 @@
 const express = require('express');
 var app = express();
 app.use('/', express.static('public'));
-app.listen(process.env.PORT || '1234',()=>{
-    console.log('Server Start');
+const PORT = process.env.PORT || '8040'
+app.listen(PORT,()=>{
+    console.log('Server Started on', PORT);
 })
