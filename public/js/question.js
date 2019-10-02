@@ -10,6 +10,7 @@ class Question{
         this.ans = ans;
         this.marked = false;
         this.user = "";
+        
     }
 }
 class Test{
